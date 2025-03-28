@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Consulta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="font-roboto bg-gray-50">
+    <div class="container mx-auto py-8 px-4">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-blue-600 px-6 py-4">
+                <h1 class="text-xl font-semibold text-white">
+                    <i class="fas fa-notes-medical mr-2"></i>
+                    Registro de Consulta Médica
+                </h1>
+            </div>
+            
+            <form id="consultationForm" class="p-6 medical-form">
+                <!-- Patient Selection -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-medium text-gray-700 mb-4 border-b pb-2">
+                        Datos del Paciente
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="md:col-span-2">
+                            <label for="patientSelect">Seleccionar Paciente</label>
+                            <select id="patientSelect" name="patientId" class="w-full" required>
+                                <option value="">Seleccione un paciente</option>
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                        
+                        <div id="patientInfo" class="md:col-span-2 hidden">
+                            <div class="bg-gray-50 p-4 rounded-md">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div>
+                                        <p class="text-sm text-gray-500">Nombre</p>
+                                        <p id="patientName" class="font-medium"></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Edad</p>
+                                        <p id="patientAge" class="font-medium"></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-gray-500">Sexo</p>
+                                        <p id="patientGender" class="font-medium"></p>
+                                    </div>
+                                    <div class="md:col-span-3">
+                                        <p class="text-sm text-gray-500">Antecedentes Médicos</p>
+                                        <p id="patientHistory" class="text-sm"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Consultation Details -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-medium text-gray-700 mb-4 border-b pb-2">
+                        Detalles de la Consulta
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="consultationDate">Fecha de Consulta</label>
+                            <input type="datetime-local" id="consultationDate" name="consultationDate" required>
+                        </div>
+                        
+                        <div>
+                            <label for="consultationType">Tipo de Consulta</label>
+                            <select id="consultationType" name="consultationType" required>
+                                <option value="">Seleccionar</option>
+                                <option value="general">Consulta General</option>
+                                <option value="followup">Control/Seguimiento</option>
+                                <option value="emergency">Urgencia</option>
+                                <option value="specialty">Especialidad</option>
+                            </select>
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label for="reason">Motivo de Consulta</label>
+                            <textarea id="reason" name="reason" rows="2" required></textarea>
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label for="symptoms">Síntomas</label>
+                            <textarea id="symptoms" name="symptoms" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label for="diagnosis">Diagnóstico</label>
+                            <textarea id="diagnosis" name="diagnosis" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label for="treatment">Tratamiento Indicado</label>
+                            <textarea id="treatment" name="treatment" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Prescriptions -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-medium text-gray-700 mb-4 border-b pb-2">
+                        Receta Médica
+                    </h2>
+                    
+                    <div id="prescriptionsContainer">
+                        <div class="prescription-item mb-4 p-4 border rounded-md">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                <div>
+                                    <label for="medication1">Medicamento</label>
+                                    <input type="text" id="medication1" name="medications[0].name" required>
+                                </div>
+                                <div>
+                                    <label for="dosage1">Dosis</label>
+                                    <input type="text" id="dosage1" name="medications[0].dosage" required>
+                                </div>
+                                <div>
+                                    <label for="frequency1">Frecuencia</label>
+                                    <input type="text" id="frequency1" name="medications[0].frequency" required>
+                                </div>
+                                <div>
+                                    <label for="duration1">Duración</label>
+                                    <input type="text" id="duration1" name="medications[0].duration" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" id="addPrescriptionBtn" class="mt-2 px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 text-sm">
+                        <i class="fas fa-plus mr-1"></i> Añadir Medicamento
+                    </button>
+                </div>
+                
+                <!-- Follow-up -->
+                <div class="mb-6">
+                    <h2 class="text-lg font-medium text-gray-700 mb-4 border-b pb-2">
+                        Control Posterior
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="followupRequired">¿Requiere control?</label>
+                            <select id="followupRequired" name="followupRequired">
+                                <option value="no">No</option>
+                                <option value="yes">Sí</option>
+                            </select>
+                        </div>
+                        
+                        <div id="followupDateContainer" class="hidden">
+                            <label for="followupDate">Fecha de Control</label>
+                            <input type="date" id="followupDate" name="followupDate">
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <label for="followupNotes">Indicaciones para el Control</label>
+                            <textarea id="followupNotes" name="followupNotes" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex justify-end space-x-4">
+                    <button type="button" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                        <i class="fas fa-save mr-2"></i>
+                        Guardar Consulta
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../js/consultation-form.js"></script>
+</body>
+</html>
