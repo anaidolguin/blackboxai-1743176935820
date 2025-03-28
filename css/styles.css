@@ -1,0 +1,59 @@
+/* Base styles */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Custom medical color palette */
+:root {
+    --medical-blue: #1a73e8;
+    --medical-light-blue: #e8f0fe;
+    --medical-green: #34a853;
+    --medical-red: #ea4335;
+    --medical-gray: #f8f9fa;
+}
+
+/* Form styles */
+.medical-form input,
+.medical-form select,
+.medical-form textarea {
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 8px 12px;
+    width: 100%;
+}
+
+.medical-form label {
+    font-weight: 500;
+    color: #3c4043;
+    margin-bottom: 4px;
+    display: block;
+}
+
+/* Alert styles */
+.alert {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+.alert-success {
+    background-color: #e6f4ea;
+    color: var(--medical-green);
+}
+
+.alert-error {
+    background-color: #fce8e6;
+    color: var(--medical-red);
+}
+
+/* Patient card styles */
+.patient-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.patient-card:hover {
+    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3),
+                0 1px 3px 1px rgba(60,64,67,0.15);
+}
